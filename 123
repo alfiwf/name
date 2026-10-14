@@ -1,3 +1,37 @@
-123
-да
-нет
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+</head>
+<body>
+    <h1>Мой список задач</h1>
+    <input type="text" id="taskInput" placeholder="Новая задача">
+    <button onclick="addTask()">Добавить</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            if (!input.value.trim()) return;
+
+            const li = document.createElement('li');
+            const textSpan = document.createElement('span');
+            textSpan.innerText = input.value;
+
+            const editBtn = document.createElement('button');
+            editBtn.innerText = 'Редактировать';
+            editBtn.onclick = () => {
+                const newText = prompt('Редактирование задачи:', textSpan.innerText);
+                if (newText !== null && newText.trim() !== '') textSpan.innerText = newText;
+            };
+
+            li.appendChild(textSpan);
+            li.appendChild(editBtn);
+            document.getElementById('taskList').appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
